@@ -30,9 +30,11 @@ function onImageClick(event){
     }
     const instance = basicLightbox.create(`
     <img src=${event.target.dataset.source} width="800" height="600">
-    `)
+    `,{
+        onShow: (instance) => window.addEventListener('keydown', onButtonClick),
+        onClose: (instance) => window.removeEventListener('keydown', onButtonClick)
+    })
     instance.show();
-    window.addEventListener("keydown", onButtonClick ) 
     function onButtonClick(event){
     if(event.code === 'Escape'){
         instance.close()
